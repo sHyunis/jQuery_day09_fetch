@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        restful Api : CRUD <!--규정 그 자체-->
+        post : create
+        get : read
+        put : update
+        delete : delete
+    </div>
+    <script>
+        const url = `https://jsonplaceholder.typicode.com/posts`;
+        const user = {
+            title   : 'html',
+            body    : '사과는 빨간색 입니다.'
+        }
+
+        // fetch(url) // 이렇게 하면 get
+        fetch(url, {
+            method  : 'POST', // create 하겠다는 의미
+            body    : JSON.stringify(user), //문자열로 바꾼다.
+            headers : {'Content-Type' : 'application/json; charset=utf-8'} // json, utf-8이라고 알려준다.
+        }).then( res => res.json() )
+        .then( console.log )
+        // create 할때는 head나 body에 담에서 보내고
+        // get은 url에 담아서 보낸다.
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./styles/reset.css">
+    <style>
+        .photos{
+            display: grid;
+            width: 1200px;
+            margin: auto;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+        }
+        
+        .card img{
+            width: 100%;
+        }
+
+        /* .title{
+            width: 300px;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        } */
+
+        .title{
+            height: 1.5rem;
+            width: 300px;
+            overflow: hidden;
+        }
+
+        @media screen and (max-width:1000px){
+            .photos{
+                width: 95%;
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        @media screen and (max-width:670px){
+            .photos{
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="photos">
+        <!-- <div class="card"></div> -->
+    </div>
+    <script>
+        let photos = []
+
+        function loadData(){
+            const url = `https://jsonplaceholder.typicode.com/photos`;
+
+            fetch(url)
+            .then(res => res.json() )
+            .then(res => {
+                // photos = res; //5000개를 가져와버림
+                photos = res.slice(0, 100)// 100개만 가져오자
+                printScreen(photos);
+            })
+        }
+
+        loadData();
+
+        //문자열을 넣으면 잘라서 리턴하는 함수
+        function stringLength(str){
+            // str의 길이
+            // return str.length >= 20 ? str.substring(0, 20) : str
+            return str.length >= 20 ? str.slice(0, 20) : str // slide 도 가능
+        }
+
+        stringLength('culpa odio esse rerum omnis laboriosam voluptate repudiandae');
+
+        function printScreen(ary){
+            ary.forEach(item=>{
+                const str = `
+                    <div class="card">
+                        <div class="postId">${item.id}</div>
+                        <div class="title">${stringLength(item.title)}</div>
+                        <img src="${item.url}" alt="${item.title}" />
+                    </div>  
+                `
+                document.querySelector('.photos').insertAdjacentHTML('beforeend', str);
+            });
+        }
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./styles/reset.css">
+    <style>
+        .row{
+            display: flex;
+            justify-content: center;
+        }
+        .postId{width: 50px;}
+        .title{ width: 400px;}
+        .body{  width: 800px;}
+    </style>
+</head>
+<body>
+    <div class="posts">
+        <!-- <div class="row">
+            <div class="postId"></div>
+            <div class="title"></div>
+            <div class="body"></div>
+        </div> -->
+    </div>
+    <script>
+        let posts = []
+
+        function loadData(){
+            const url = `https://jsonplaceholder.typicode.com/posts`;
+
+            fetch(url)
+            .then(res => res.json() )
+            // .then(console.log )
+            .then(res => {
+                posts = res;
+                printScreen(posts)
+            })
+        }
+
+        loadData();
+
+        function printScreen(ary){
+            ary.forEach(item=>{
+                const str = `
+                <div class="row">
+                    <div class="postId">${item.id}</div>
+                    <div class="title">${item.title}</div>
+                    <div class="body">${item.body}</div>
+                </div>  
+                `
+                document.querySelector('.posts').insertAdjacentHTML('beforeEnd', str);
+            });
+        }
+
+    </script>
+</body>
+</html>

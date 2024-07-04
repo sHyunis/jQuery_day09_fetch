@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./styles/reset.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <style>
+        .row{
+            display: grid;
+            grid-template-columns: 50px 300px 50px 50px;
+        }
+
+        /* 크기를 일관적으로 */
+        .row input{
+            width: 20px;
+            height: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="todos">
+        <!-- <div class="row">
+            <div class="todoId"></div>
+            <div class="title"></div>
+            <input type="checkbox" checked="">
+        </div> -->
+    </div>
+    <script>
+        let todos = []
+
+        function loadData(){
+            const url = `https://jsonplaceholder.typicode.com/todos`;
+
+            fetch(url)
+            .then(res => res.json() )
+            .then(res => {
+
+                todos = res;
+                printScreen(todos);
+            })
+        }
+
+        loadData();
+
+        function printScreen(ary){
+            ary.forEach(item=>{
+                const str = `
+                    <div class="row">
+                        <div class="todoId">${item.id}</div>
+                        <div class="title">${item.title}</div>
+                        <input type="checkbox" ${item.completed ? "checked" : null}>
+
+                        <i class='bx bx-x-circle'></i>
+                    </div> 
+                `
+                document.querySelector('.todos').insertAdjacentHTML('beforeend', str);
+            });
+        }
+
+    </script>
+</body>
+</html>

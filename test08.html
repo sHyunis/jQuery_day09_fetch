@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        restful Api : CRUD 
+        post : create
+        get : read
+        put : update
+        delete : delete
+    </div>
+    <script>
+        const url = `https://jsonplaceholder.typicode.com/posts/1`;
+        const user = {
+            title   : 'html',
+            body    : '사과는 빨간색 입니다.'
+        }
+
+        fetch(url, {
+            method  : 'PUT', //수정하는 문법
+            body    : JSON.stringify(user), 
+            headers : {'Content-Type' : 'application/json; charset=utf-8'}
+        }).then( res => res.json() )
+        .then( console.log )
+    </script>
+</body>
+</html>
